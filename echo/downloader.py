@@ -85,8 +85,8 @@ class EchoDownloader:
                              "Make sure you have up-to-date cookies in 'cookies.txt'")
 
     def download_course(self, course, term_name):
-        url = f"/section/{course['sectionId']}/syllabus"
-        print(f"Downloading course: {course['courseCode']} ({course['courseName']})")
+        url = "/section/{}/syllabus".format(course['sectionId'])
+        print("Downloading course: {} ({})".format(course['courseCode'], course['courseName']))
 
         resp = self.session.get(url)
         course_folder = os.path.join(term_name, course['courseCode'])
@@ -137,14 +137,14 @@ class EchoDownloader:
 
         download_folder = os.path.join(self.dest_directory, termName, courseName)
         os.makedirs(download_folder, exist_ok=True)
-        filename = f'{date_formatted} - {media_type}'
+        filename = '{} - {}.format(date_formatted, media_type)'
         filepath = os.path.join(download_folder, filename)
 
         if os.path.isfile(filepath):
             print("Keeping existing file: " + filepath)
             return
 
-        print(f"Downloading resource: {filepath}")
+        print("Downloading resource: {}".format(filepath))
 
 
         response = self.session.get(url, stream=True)
