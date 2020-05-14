@@ -4,7 +4,7 @@ This is modified version of script written by Andrew Ferguson: https://tardis.ed
 
 # Install
 
-``pip3 install echo360download``
+``pip3 install git+https://github.com/aalok-sathe/echo360download``
 
 # Usage:
 
