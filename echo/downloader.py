@@ -7,6 +7,7 @@ import os
 import shutil
 import sys
 import dateutil.parser as date_parser
+from datetime import datetime
 
 from requests.utils import add_dict_to_cookiejar
 
@@ -132,9 +133,12 @@ class EchoDownloader:
         self.downloadResource(medias[bestIndex]["s3Url"], time, type, courseName, termName)
 
     def downloadResource(self, url, time, media_type, courseName, termName):
-        dt = date_parser.parse(time)
-        date_formatted = dt.strftime("%m.%d - %H%M")
-
+        try:
+            dt = date_parser.parse(time)
+            date_formatted = dt.strftime("%m.%d - %H%M")
+        except TypeError: # not all lectures have a recording date/time because of manual upload
+            date_formatted = datetime.now().strftime("UNKNOWN TIME. downloaded at %m.%d - %H.%M.%S")
+            
         download_folder = os.path.join(self.dest_directory, termName, courseName)
         os.makedirs(download_folder, exist_ok=True)
         filename = '{} - {}'.format(date_formatted, media_type)
