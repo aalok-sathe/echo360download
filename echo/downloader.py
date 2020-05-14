@@ -137,7 +137,7 @@ class EchoDownloader:
 
         download_folder = os.path.join(self.dest_directory, termName, courseName)
         os.makedirs(download_folder, exist_ok=True)
-        filename = '{} - {}.format(date_formatted, media_type)'
+        filename = '{} - {}'.format(date_formatted, media_type)
         filepath = os.path.join(download_folder, filename)
 
         if os.path.isfile(filepath):
